@@ -27,7 +27,7 @@ func generateThumbnailRepresentation(url: URL) async -> QLThumbnailRepresentatio
     // Create the thumbnail request.
     let request = QLThumbnailGenerator.Request(
         fileAt: url,
-        size: CGSize(width: 60, height: 90),
+        size: CGSize(width: 90, height: 90),
         scale: 5.0,
         representationTypes: .all
     )
