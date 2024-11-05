@@ -10,7 +10,7 @@ import Foundation
 enum FileType: String, CaseIterable {
     case image
     case livePhoto = "live photo"
-    case textFile = "text file"
+    case text = "text file"
     case pdf = "PDF"
     case audio = "audio file"
     case video = "video file"
@@ -24,7 +24,7 @@ enum FileType: String, CaseIterable {
             // TODO: add live photo support.
             return false
             
-        case .textFile:
+        case .text:
             return fileExtension.lowercased() == "txt"
             
         case .pdf:
@@ -38,7 +38,6 @@ enum FileType: String, CaseIterable {
         }
     }
 }
-
 
 /// Enumeration representing common images extensions.
 enum ImageExtension: String, CaseIterable {
@@ -110,5 +109,23 @@ enum VideoFileExtension: String, CaseIterable {
     /// Returns all video file extensions as an array of strings.
     static var allExtensions: [String] {
         return VideoFileExtension.allCases.map { $0.rawValue }
+    }
+}
+
+extension String {
+    var fileType: FileType? {
+        if ImageExtension.isValidImageExtension(self) {
+            return .image
+        } else if self.lowercased() == "txt" {
+            return .text
+        } else if self.lowercased() == "pdf" {
+            return .pdf
+        } else if AudioFileExtension.isValidAudioExtension(self) {
+            return .audio
+        } else if VideoFileExtension.isValidVideoExtension(self) {
+            return .video
+        } else {
+            return nil
+        }
     }
 }

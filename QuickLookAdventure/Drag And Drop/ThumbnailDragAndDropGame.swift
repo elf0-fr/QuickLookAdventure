@@ -30,10 +30,7 @@ struct ThumbnailDragAndDropGame: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(resources, id: \.name) { resource in
-                        ThumbnailView(
-                            resource: resource.name,
-                            withExtension: resource.extension
-                        )
+                        ThumbnailView(resource: resource)
                         .draggable(resource)
                     }
                 }

@@ -15,10 +15,7 @@ struct ClickableThumbnail: View {
     
     var body: some View {
         VStack {
-            ThumbnailView(
-                resource: resource.name,
-                withExtension: resource.extension
-            )
+            ThumbnailView(resource: resource)
             .frame(width: 100, height: 100)
             .background {
                 if selections[index] {

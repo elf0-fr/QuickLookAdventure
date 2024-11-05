@@ -15,6 +15,10 @@ struct Resource: Codable, Equatable {
     
     let url: URL?
     
+    var fileType: FileType? {
+        self.extension.fileType
+    }
+    
     init(name: String, `extension`: String) {
         self.name = name
         self.extension = `extension`
