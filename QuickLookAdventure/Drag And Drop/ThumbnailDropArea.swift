@@ -25,8 +25,10 @@ struct ThumbnailDropArea: View {
                     if let resource = resources.first {
                         
                         if fileType.isValidFileType(resource.extension) {
-                            self.resources.removeAll { _resource in
-                                _resource.name == resource.name
+                            withAnimation {
+                                self.resources.removeAll { _resource in
+                                    _resource.name == resource.name
+                                }
                             }
                             return true
                         }
