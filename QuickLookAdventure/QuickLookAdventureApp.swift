@@ -34,7 +34,9 @@ struct QuickLookAdventureApp: App {
     }
 }
 
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate, QLPreviewPanelDelegate {
+    
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         return false
     }
@@ -51,14 +53,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, QLPreviewPanelDelegate {
     }
 
     override func endPreviewPanelControl(_ panel: QLPreviewPanel!) {
-        // Comment this line due to error :
-        // -[QLPreviewPanel setDelegate:] called while the panel has no controller - Fix this or this will raise soon.
-        // See comments in QLPreviewPanel.h for -acceptsPreviewPanelControl:/-beginPreviewPanelControl:/-endPreviewPanelControl:.
-        
-//        DispatchQueue.main.async {
-//            print("endPreviewPanelControl")
-//            panel.delegate = nil
-//            panel.dataSource = nil
-//        }
+        DispatchQueue.main.async {
+            if let _ = panel.dataSource, let _ = panel.delegate {
+                panel.dataSource = nil
+                panel.delegate = nil
+            }
+        }
     }
 }
