@@ -53,12 +53,13 @@ struct ClickableThumbnail: View {
                 return .ignored
             }
             
-            guard let fileURL = resource.url else {
-                print("unable to get file URL for \(resource.name).")
-                return .ignored
+            if (PreviewPanelController.shared.isVisible) {
+                PreviewPanelController.shared.hidePreview()
+            }
+            else {
+                PreviewPanelController.shared.showPreview(resource: resource)
             }
             
-            PreviewPanelController.shared.showPreview(fileURL: fileURL)
             return .handled
         }
     }
