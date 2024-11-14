@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import QuickLook
 
 struct ThumbnailGrid: View {
     
@@ -14,6 +15,7 @@ struct ThumbnailGrid: View {
     @State private var selectedIndexes: [Int] = []
     @State private var isCommandDown: Bool = false
     @State private var isShiftDown: Bool = false
+    @State private var selectedResource: URL?
     
     let columns = [
         GridItem(.flexible()),
@@ -38,6 +40,10 @@ struct ThumbnailGrid: View {
                             selection: select
                         )
                         .frame(width: 100)
+                        .onLongPressGesture {
+                            selectedResource = resource.url
+                        }
+                        .quickLookPreview($selectedResource)
                     }
                 }
             }
