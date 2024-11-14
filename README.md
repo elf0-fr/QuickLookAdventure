@@ -1,6 +1,6 @@
-QuickLook Adventure - macOS Application
+QuickLook Adventure - iOS & macOS Application
 
-Welcome to the File Type Guessing Game for macOS! This interactive application combines elements of a guessing game and a file browser. Users will test their knowledge of file types based on thumbnail previews and interact with files in a unique, engaging way.
+Welcome to the File Type Guessing Game for iOS and macOS! This interactive application combines elements of a guessing game and a file browser. Users will test their knowledge of file types based on thumbnail previews and interact with files in a unique, engaging way.
 
 Features
 
