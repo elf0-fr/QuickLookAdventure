@@ -30,9 +30,9 @@ struct QuickLookAdventureApp: App {
                     }
             }
             else {
-#if os(macOS)
-                ThumbnailGrid(resources: resources)
-#endif
+                NavigationStack {
+                    ThumbnailGrid(resources: resources)                    
+                }
             }
         }
     }

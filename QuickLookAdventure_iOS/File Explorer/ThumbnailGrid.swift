@@ -2,18 +2,19 @@
 //  ThumbnailGrid.swift
 //  QuickLookAdventure
 //
-//  Created by Elfo on 01/11/2024.
+//  Created by Elfo on 14/11/2024.
 //
 
 import SwiftUI
+import QuickLook
 
 struct ThumbnailGrid: View {
     
     let resources: [Resource]
     
+    @State private var isSelectable: Bool = false
     @State private var selectedIndexes: [Int] = []
-    @State private var isCommandDown: Bool = false
-    @State private var isShiftDown: Bool = false
+    @State private var selectedResource: URL?
     
     let columns = [
         GridItem(.flexible()),
@@ -38,32 +39,31 @@ struct ThumbnailGrid: View {
                             selection: select
                         )
                         .frame(width: 100)
+                        .onLongPressGesture {
+                            selectedResource = resource.url
+                        }
+                        .quickLookPreview($selectedResource)
                     }
                 }
             }
         }
-        .onModifierKeysChanged(mask: .command) { old, new in
-            isCommandDown = !new.isEmpty
-        }
-        .onModifierKeysChanged(mask: .shift) { old, new in
-            isShiftDown = !new.isEmpty
-        }
-        .onKeyPress(.space) {
-            if (PreviewPanelController.shared.isVisible) {
-                PreviewPanelController.shared.hidePreview()
-            }
-            else {
-                guard !selectedIndexes.isEmpty else {
-                    return .ignored
-                }
-
-                let _resources = selectedIndexes.sorted().map { resources[$0] }
-                PreviewPanelController.shared.showPreview(resources: _resources)
-            }
-            
-            return .handled
-        }
         .padding()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if isSelectable {
+                    Button("Done") {
+                        isSelectable = false
+                        selectedIndexes.removeAll()
+                    }
+                } else {
+                    Button {
+                        isSelectable = true
+                    } label: {
+                        Image(systemName: "checkmark.circle")
+                    }
+                }
+            }
+        }
     }
     
     func isSelected(_ index: Int) -> Bool {
@@ -94,29 +94,15 @@ struct ThumbnailGrid: View {
     }
     
     func select(index: Int) {
-        if !isShiftDown && !isCommandDown {
-            // Deselection all the previous selected thumbnails
-            // excepted the one at index 'index'.
-            selectedIndexes.removeAll { $0 != index }
-            toggleSelection(index: index)
-            
-        } else if isCommandDown {
-            // Only deselect or select the thumbnail at index 'index'
-            toggleSelection(index: index)
-            
-        } else {
-            // Selection a rage of thumbnails.
-            let lastIndex = selectedIndexes.last
-            if let lastIndex {
-                selectRange(from: lastIndex, to: index)
-            } else {
-                toggleSelection(index: index)
-            }
-        }
+        guard isSelectable else { return }
+        
+        selectedIndexes.removeAll { $0 != index }
+        toggleSelection(index: index)
     }
 }
 
 #Preview {
-    ThumbnailGrid(resources: Resource.sampleData)
-        .frame(minWidth: 500)
+    NavigationStack {
+        ThumbnailGrid(resources: Resource.sampleData)
+    }
 }
