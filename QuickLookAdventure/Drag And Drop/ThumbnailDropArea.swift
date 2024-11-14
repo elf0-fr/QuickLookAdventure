@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ThumbnailDropArea: View {
+    
     var fileType: FileType
     @Binding var resources: [Resource]
     
@@ -21,27 +22,9 @@ struct ThumbnailDropArea: View {
             
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.blue, lineWidth: 2)
-                .dropDestination(for: Resource.self) { resources, location in
-                    if let resource = resources.first {
-                        
-                        if fileType.isValidFileType(resource.extension) {
-                            withAnimation {
-                                self.resources.removeAll { _resource in
-                                    _resource.name == resource.name
-                                }
-                            }
-                            return true
-                        }
-                    }
-                    
-                    // Trigger the shaking effect
-                    isShaking = true
-                    // Reset isShaking to false after the animation is done
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        isShaking = false
-                    }
-                    return false
-                }
+        }
+        .dropDestination(for: Resource.self, action: dropAction) { value in
+            print("isTargeted: \(value)")
         }
         .frame(maxWidth: 200, minHeight: 100, maxHeight: 100)
         .padding()
@@ -51,6 +34,27 @@ struct ThumbnailDropArea: View {
                 .repeatCount(5, autoreverses: true), // Repeat animation to create shake effect
             value: isShaking
         )
+    }
+    
+    func dropAction(resources: [Resource], location: CGPoint) -> Bool {
+        if let resource = resources.first {
+            if fileType.isValidFileType(resource.extension) {
+                withAnimation {
+                    self.resources.removeAll { _resource in
+                        _resource.name == resource.name
+                    }
+                }
+                return true
+            }
+        }
+        
+        // Trigger the shaking effect
+        isShaking = true
+        // Reset isShaking to false after the animation is done
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            isShaking = false
+        }
+        return false
     }
 }
 

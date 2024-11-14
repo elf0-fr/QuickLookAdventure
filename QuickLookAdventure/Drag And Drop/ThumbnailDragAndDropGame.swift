@@ -31,7 +31,7 @@ struct ThumbnailDragAndDropGame: View {
                 HStack {
                     ForEach(resources, id: \.name) { resource in
                         ThumbnailView(resource: resource)
-                        .draggable(resource)
+                            .draggable(resource)
                     }
                 }
             }
