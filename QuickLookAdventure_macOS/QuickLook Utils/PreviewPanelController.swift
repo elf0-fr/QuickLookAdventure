@@ -13,15 +13,17 @@ class PreviewPanelController: NSObject {
 
     static let shared = PreviewPanelController()
     
-    private var resource: Resource?
+    private var currentIndex: Int = 0
+    private var resources: [Resource] = []
     private var previewPanel: QLPreviewPanel?
     
     var isVisible: Bool {
         previewPanel?.isVisible ?? false
     }
     
-    func showPreview(resource: Resource) {
-        self.resource = resource
+    func showPreview(resources: [Resource]) {
+        self.currentIndex = 0
+        self.resources = resources
         previewPanel = QLPreviewPanel.shared()
         
         centerPreview()
@@ -57,11 +59,11 @@ class PreviewPanelController: NSObject {
 extension PreviewPanelController: @preconcurrency QLPreviewPanelDataSource {
     
     func numberOfPreviewItems(in panel: QLPreviewPanel!) -> Int {
-        return resource != nil ? 1 : 0
+        return resources.count
     }
     
     func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
-        return resource?.url as QLPreviewItem?
+        return resources[currentIndex].url as QLPreviewItem?
     }
 }
 
@@ -74,12 +76,21 @@ extension PreviewPanelController: @preconcurrency QLPreviewPanelDelegate {
 //    }
     
     // Watch for input event.
-//    func previewPanel(_ panel: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
-//        guard event.type == .keyDown else { return false }
-//        
-//        print("Keydown event with key: \(event.characters!)")
-//        return true
-//    }
+    func previewPanel(_ panel: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
+        guard event.type == .keyDown else { return false }
+        
+        if event.specialKey == .leftArrow {
+            currentIndex = max(currentIndex - 1, 0)
+            panel.reloadData()
+            return true
+        } else if event.specialKey == .rightArrow {
+            currentIndex = min(currentIndex + 1, resources.count - 1)
+            panel.reloadData()
+            return true
+        }
+        
+        return false
+    }
     
     // I didn't manage to get this method to be called.
 //    func previewPanel(_ panel: QLPreviewPanel!, transitionImageFor item: (any QLPreviewItem)!, contentRect: UnsafeMutablePointer<NSRect>!) -> Any! {

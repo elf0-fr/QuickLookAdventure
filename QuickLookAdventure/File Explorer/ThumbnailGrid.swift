@@ -8,25 +8,18 @@
 import SwiftUI
 
 struct ThumbnailGrid: View {
-    var resources: [Resource]
     
-    @State var selection: [Bool]
+    let resources: [Resource]
+    
+    @State private var selectedIndexes: [Int] = []
+    @State private var isCommandDown: Bool = false
+    @State private var isShiftDown: Bool = false
     
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-    
-    init(resources: [Resource]) {
-        self.resources = resources
-        _selection = State(
-            initialValue: Array(
-                repeating: false,
-                count: resources.count
-            )
-        )
-    }
     
     var body: some View {
         VStack {
@@ -37,19 +30,89 @@ struct ThumbnailGrid: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(Array(resources.enumerated()), id: \.element.name) {
-                        index,
-                        resource in
+                        index, resource in
                         ClickableThumbnail(
                             resource: resource,
                             index: index,
-                            selections: $selection
+                            isSelected: isSelected(index),
+                            selection: select
                         )
                         .frame(width: 100)
                     }
                 }
             }
         }
+        .onModifierKeysChanged(mask: .command) { old, new in
+            isCommandDown = !new.isEmpty
+        }
+        .onModifierKeysChanged(mask: .shift) { old, new in
+            isShiftDown = !new.isEmpty
+        }
+        .onKeyPress(.space) {
+            if (PreviewPanelController.shared.isVisible) {
+                PreviewPanelController.shared.hidePreview()
+            }
+            else {
+                guard !selectedIndexes.isEmpty else {
+                    return .ignored
+                }
+
+                let _resources = selectedIndexes.sorted().map { resources[$0] }
+                PreviewPanelController.shared.showPreview(resources: _resources)
+            }
+            
+            return .handled
+        }
         .padding()
+    }
+    
+    func isSelected(_ index: Int) -> Bool {
+        selectedIndexes.contains(index)
+    }
+    
+    func toggleSelection(index: Int) {
+        if let _index = selectedIndexes.firstIndex(of: index) {
+            selectedIndexes.remove(at: _index)
+        } else {
+            selectedIndexes.append(index)
+        }
+    }
+    
+    func selectRange(from: Int, to: Int) {
+        let collection: any Collection<Int>
+        if from < to {
+            collection = from...to
+        } else {
+            collection = (to...from).reversed()
+        }
+        
+        for i in collection {
+            if selectedIndexes.firstIndex(of: i) == nil {
+                selectedIndexes.append(i)
+            }
+        }
+    }
+    
+    func select(index: Int) {
+        if !isShiftDown && !isCommandDown {
+            // Deselection all the previous selected thumbnails
+            // excepted the one at index 'index'.
+            selectedIndexes.removeAll { $0 != index }
+            toggleSelection(index: index)
+            
+        } else if isCommandDown {
+            // Only deselect or select the thumbnail at index 'index'
+            toggleSelection(index: index)
+            
+        } else {
+            // Selection a rage of thumbnails.
+            let lastIndex = selectedIndexes.last
+            if let lastIndex {
+                selectRange(from: lastIndex, to: index)
+            } else {
+                toggleSelection(index: index)
+            }
+        }
     }
 }
 

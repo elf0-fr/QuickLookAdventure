@@ -15,7 +15,6 @@
 		76AB291E2CE5E425000365D9 /* Exceptions for "QuickLookAdventure" folder in "QuickLookAdventure_iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"File Explorer/ClickableThumbnail.swift",
 				"File Explorer/ThumbnailGrid.swift",
 			);
 			target = 76AB28F22CE5DDDB000365D9 /* QuickLookAdventure_iOS */;
