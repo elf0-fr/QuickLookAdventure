@@ -15,6 +15,7 @@ struct ThumbnailGrid: View {
     @State private var isSelectable: Bool = false
     @State private var selectedIndexes: [Int] = []
     @State private var selectedResource: URL?
+    @State private var longPressingIndex: Int? = nil
     
     let columns = [
         GridItem(.adaptive(minimum: 100, maximum: 150), spacing: 20)
@@ -36,8 +37,12 @@ struct ThumbnailGrid: View {
                             isSelected: isSelected(index),
                             selection: select
                         )
-                        .frame(width: 100)
-                        .onLongPressGesture {
+                        .scaleEffect(longPressingIndex == index ? 1.2 : 1.0)
+                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                longPressingIndex = isPressing ? index : nil
+                            }
+                        }) {
                             selectedResource = resource.url
                         }
                         .quickLookPreview($selectedResource)

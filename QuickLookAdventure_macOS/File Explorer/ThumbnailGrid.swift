@@ -37,9 +37,13 @@ struct ThumbnailGrid: View {
                             isSelected: isSelected(index),
                             selection: select
                         )
-                        .frame(width: 100)
-                        .onLongPressGesture {
-                            selectedResource = resource.url
+                        .contextMenu {
+                            Button {
+                                selectedResource = resource.url
+                            } label: {
+                                Label("Preview", systemImage: "eye")
+                                    .labelStyle(.titleAndIcon)
+                            }
                         }
                         .quickLookPreview($selectedResource)
                     }
