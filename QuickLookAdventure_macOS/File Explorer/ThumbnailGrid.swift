@@ -18,9 +18,7 @@ struct ThumbnailGrid: View {
     @State private var selectedResource: URL?
     
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.adaptive(minimum: 100, maximum: 150), spacing: 20)
     ]
     
     var body: some View {
