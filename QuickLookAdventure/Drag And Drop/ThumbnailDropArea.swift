@@ -23,9 +23,7 @@ struct ThumbnailDropArea: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.blue, lineWidth: 2)
         }
-        .dropDestination(for: Resource.self, action: dropAction) { value in
-            print("isTargeted: \(value)")
-        }
+        .dropDestination(for: Resource.self, action: dropAction)
         .frame(maxWidth: 200, minHeight: 100, maxHeight: 100)
         .padding()
         .offset(x: isShaking ? -10 : 0) // Apply horizontal offset when shaking

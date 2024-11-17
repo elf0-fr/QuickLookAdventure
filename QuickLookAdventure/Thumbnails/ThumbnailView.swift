@@ -7,159 +7,39 @@
 
 import SwiftUI
 
+/// A view designed to display thumbnails for various resource types.
 struct ThumbnailView: View {
+    
     var resource: Resource
-    
-    @State private var cgImage: CGImage? = nil
-    
-    @ViewBuilder
-    private var thumbnail: some View {
-        if let cgImage {
-            Image(
-                decorative: cgImage,
-                scale: 1.0,
-                orientation: .up
-            )
-            .resizable()
-        } else {
-            EmptyView()
-        }
-    }
-    
-    private var imageThumbnail: some View {
-        thumbnail
-            .scaledToFit()
-            .border(.black.secondary, width: 0.3)
-            .padding(3)
-            .background {
-                Rectangle()
-                    .foregroundStyle(.white)
-            }
-    }
-    
-    private var textThumbnail: some View {
-        thumbnail
-            .aspectRatio(0.707, contentMode: .fit)
-            .padding(4)
-            .background {
-                Rectangle()
-                    .foregroundStyle(.white)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 2))
-            .overlay(alignment: .topTrailing) {
-                RoundedRectangle(cornerRadius: 3)
-                    .foregroundStyle(.white)
-                    .frame(width: 23, height: 23)
-                    .shadow(radius: 2, x: -2, y: 1)
-            }
-            .clipShape(
-                TopRightCutShape(
-                    cutSize: 25,
-                    cornerRadius: 10
-                )
-            )
-    }
-    
-    private var pdfThumbnail: some View {
-        thumbnail
-            .scaledToFit()
-            .clipShape(RoundedRectangle(cornerRadius: 2))
-            .overlay(alignment: .topTrailing) {
-                RoundedRectangle(cornerRadius: 3)
-                    .foregroundStyle(.white)
-                    .frame(width: 23, height: 23)
-                    .shadow(radius: 2, x: -2, y: 1)
-            }
-            .clipShape(
-                TopRightCutShape(
-                    cutSize: 25,
-                    cornerRadius: 10
-                )
-            )
-    }
-    
-    private var audioThumbnail: some View {
-        thumbnail
-    }
-    
-    @State private var size: CGSize? = nil
-    @ViewBuilder
-    private var _videoThumbnail: some View {
-        Rectangle()
-        
-        thumbnail
-            .scaledToFit()
-            .frame(width: size!.width, height: size!.height)
-        
-        Rectangle()
-    }
-    
-    @ViewBuilder
-    private var videoThumbnail: some View {
-        if let size {
-            if size.height / size.width < 0 {
-                HStack(spacing: 0) {
-                    _videoThumbnail
-                }
-                .padding(.horizontal, 10)
-            } else {
-                VStack(spacing: 0) {
-                    _videoThumbnail
-                }
-                .padding(.vertical, 10)
-            }
-        } else {
-            thumbnail
-                .scaledToFit()
-                .background {
-                    GeometryReader { geometry in
-                        Color.clear
-                            .onAppear {
-                                size = geometry.size
-                            }
-                    }
-                }
-        }
-    }
     
     var body: some View {
         Group {
-            if let _ = cgImage, let fileType = resource.fileType {
+            if let fileType = resource.fileType {
                 Group {
                     switch fileType {
                     case .image:
-                        imageThumbnail
+                        ImageThumbnail(resource: resource)
                     case .livePhoto:
-                        imageThumbnail
+                        ImageThumbnail(resource: resource)
                     case .text:
-                        textThumbnail
+                        TextThumbnail(resource: resource)
                     case .pdf:
-                        pdfThumbnail
+                        PDFThumbnail(resource: resource)
                     case .audio:
-                        audioThumbnail
+                        RawThumbnail(resource: resource, cgImage: nil)
                     case .video:
-                        videoThumbnail
+                        VideoThumbnail(resource: resource)
                     }
                 }
+#if os(macOS)
                 .shadow(radius: 2)
+#endif
                 .padding(5)
             } else {
                 ProgressView()
             }
         }
         .frame(width: 90, height: 90)
-        .onAppear {
-            Task {
-                guard let url = resource.url else {
-                    return
-                }
-                
-                let thumbnail = await generateThumbnailRepresentation(url: url)
-                if let image = thumbnail?.cgImage {
-                    cgImage = image
-                }
-            }
-        }
     }
 }
 
@@ -175,23 +55,50 @@ struct ThumbnailView: View {
     .padding(50)
 }
 
-#Preview("PNG") {
-    ThumbnailView(
-        resource: Resource.sampleData.first { $0.extension == "png" }!
-    )
-    .padding(50)
+/// A function to determine the size of a thumbnail.
+///
+/// This helps to ensure thumbnails are displayed correctly for given dimensions.
+@MainActor
+func getThumbnailSize(
+    _ resource: Resource,
+    _ cgImage: CGImage,
+    _ size: Binding<CGSize?>
+) -> some View {
+    RawThumbnail(resource: resource, cgImage: cgImage)
+        .scaledToFit()
+        .background {
+            GeometryReader { geometry in
+                Color.clear
+                    .onAppear {
+                        size.wrappedValue = geometry.size
+                    }
+            }
+        }
 }
 
-#Preview("TXT") {
-    ThumbnailView(
-        resource: Resource.sampleData.first { $0.extension == "txt" }!
-    )
-    .padding(50)
+#if os(iOS)
+/// A function to render a properly styled thumbnail on iOS devices.
+@MainActor
+func showIOSThumbnail(
+    _ resource: Resource,
+    _ cgImage: CGImage,
+    _ size: CGSize
+) -> some View {
+    VStack {
+        if size.height < size.width {
+            // If the thumbnail is wider than it is tall, add spacing at the top.
+            Spacer()
+        }
+        
+        RawThumbnail(resource: resource, cgImage: cgImage)
+            .scaledToFit()
+            .clipShape(RoundedRectangle(cornerRadius: 5))
+            .overlay {
+                // Add a subtle border around the thumbnail.
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke()
+                    .foregroundStyle(.black.tertiary)
+            }
+    }
 }
-
-#Preview("PDF") {
-    ThumbnailView(
-        resource: Resource.sampleData.first { $0.extension == "pdf" }!
-    )
-    .padding(50)
-}
+#endif

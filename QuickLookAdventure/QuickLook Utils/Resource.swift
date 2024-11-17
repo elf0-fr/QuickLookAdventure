@@ -31,12 +31,37 @@ struct Resource: Codable, Equatable {
         }
     }
     
-    @MainActor static let sampleData: [Resource] = [
+    @MainActor
+    static let sampleData: [Resource] = [
         .init(name: "SWE - UI Developer – Quick Look", extension: "png"),
         .init(name: "QuickLook Thumbnailing | Apple Developer Documentation", extension: "pdf"),
         .init(name: "Demo", extension: "mov"),
         .init(name: "Text", extension: "txt"),
     ]
+    
+    @MainActor
+    static let sampleImage: Resource = .init(
+        name: "SWE - UI Developer – Quick Look",
+        extension: "png"
+    )
+    
+    @MainActor
+    static let samplePDF: Resource = .init(
+        name: "QuickLook Thumbnailing | Apple Developer Documentation",
+        extension: "pdf"
+    )
+    
+    @MainActor
+    static let sampleVideo: Resource = .init(
+        name: "Demo",
+        extension: "mov"
+    )
+    
+    @MainActor
+    static let sampleText: Resource = .init(
+        name: "Text",
+        extension: "txt"
+    )
 }
 
 extension Resource: Transferable {
