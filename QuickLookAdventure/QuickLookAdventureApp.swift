@@ -14,24 +14,25 @@ struct QuickLookAdventureApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 #endif
     
+    @State private var dragAndDropViewModel = DragAndDropViewModel(resources: Resource.sampleData)
     @State private var resources: [Resource] = Resource.sampleData
     
     @State private var isDragAndDropCompleted: Bool = false
 
     var body: some Scene {
         WindowGroup {
-            if !isDragAndDropCompleted {
-                ThumbnailDragAndDropGame(resources: $resources)
-                    .onChange(of: resources) {
-                        if resources.isEmpty {
-                            resources = Resource.sampleData
-                            isDragAndDropCompleted = true
+            NavigationStack {
+                if !isDragAndDropCompleted {
+                    ThumbnailDragAndDropGame()
+                        .environment(dragAndDropViewModel)
+                        .onChange(of: dragAndDropViewModel.isGameOver) {
+                            if dragAndDropViewModel.isGameOver {
+                                isDragAndDropCompleted = true
+                            }
                         }
-                    }
-            }
-            else {
-                NavigationStack {
-                    ThumbnailGrid(resources: resources)                    
+                }
+                else {
+                    ThumbnailGrid(resources: resources)
                 }
             }
         }

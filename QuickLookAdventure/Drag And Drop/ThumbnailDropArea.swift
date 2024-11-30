@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ThumbnailDropArea: View {
     
-    var fileType: FileType
-    @Binding var resources: [Resource]
-    
+    @Environment(DragAndDropViewModel.self) private var viewModel
     // State variable to control the shaking effect
     @State private var isShaking = false
+    
+    var fileType: FileType
     
     var body: some View {
         ZStack {
@@ -35,30 +35,23 @@ struct ThumbnailDropArea: View {
     }
     
     func dropAction(resources: [Resource], location: CGPoint) -> Bool {
-        if let resource = resources.first {
-            if fileType.isValidFileType(resource.extension) {
-                withAnimation {
-                    self.resources.removeAll { _resource in
-                        _resource.name == resource.name
-                    }
-                }
-                return true
+        return viewModel.dropAction(
+            resources: resources,
+            fileType: fileType
+        ) {
+            // Trigger the shaking effect
+            isShaking = true
+            // Reset isShaking to false after the animation is done
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isShaking = false
             }
         }
-        
-        // Trigger the shaking effect
-        isShaking = true
-        // Reset isShaking to false after the animation is done
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            isShaking = false
-        }
-        return false
     }
 }
 
 #Preview {
-    ThumbnailDropArea(
-        fileType: FileType.image,
-        resources: .constant(Resource.sampleData)
-    )
+    @Previewable @State var viewModel = DragAndDropViewModel(resources: Resource.sampleData)
+    
+    ThumbnailDropArea(fileType: FileType.image)
+        .environment(viewModel)
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ThumbnailDragAndDropGame: View {
-    @Binding var resources: [Resource]
+    @Environment(DragAndDropViewModel.self) private var viewModel
     
     let columns = [
         GridItem(.flexible()),
@@ -18,15 +18,12 @@ struct ThumbnailDragAndDropGame: View {
     
     var body: some View {
         VStack {
-            Text("Thumbnail Drag and Drop Game")
-                .font(.title)
-                .padding(.bottom)
-            
             HStack {
-                Text("Drag and drop those thumbnails to the drop areas corresponding to their file types.")
+                Text(viewModel.description)
                 Spacer()
             }
             
+            let resources = viewModel.resources
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(resources, id: \.name) { resource in
@@ -39,20 +36,22 @@ struct ThumbnailDragAndDropGame: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(FileType.allCases, id: \.self) { fileType in
-                        ThumbnailDropArea(
-                            fileType: fileType,
-                            resources: $resources
-                        )
+                        ThumbnailDropArea(fileType: fileType)
                     }
                 }
             }
         }
+        .navigationTitle(viewModel.title)
         .padding(.horizontal)
         .padding(.top)
     }
 }
 
 #Preview {
-    @Previewable @State var resources: [Resource] = Resource.sampleData
-    ThumbnailDragAndDropGame(resources: $resources)
+    @Previewable @State var viewModel = DragAndDropViewModel(resources: Resource.sampleData)
+    
+    NavigationStack {
+        ThumbnailDragAndDropGame()
+            .environment(viewModel)
+    }
 }
