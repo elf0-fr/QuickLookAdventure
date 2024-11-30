@@ -25,11 +25,3 @@ struct RawThumbnail: View {
         }
     }
 }
-
-#Preview {
-    RawThumbnail(
-        resource: Resource.sampleData[0],
-        cgImage: nil
-    )
-    
-}

@@ -1,5 +1,5 @@
 //
-//  ClickableThumbnail.swift
+//  SelectableThumbnail.swift
 //  QuickLookAdventure
 //
 //  Created by Elfo on 01/11/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ClickableThumbnail: View {
+struct SelectableThumbnail: View {
     
     /// The resource that will be display as a thumbnail.
     let resource: Resource
@@ -56,7 +56,7 @@ struct ClickableThumbnail: View {
     VStack {
         ForEach(Array(Resource.sampleData.enumerated()), id: \.element.name) {
             index, resource in
-            ClickableThumbnail(
+            SelectableThumbnail(
                 resource: resource,
                 index: index,
                 isSelected: isSelected[index],

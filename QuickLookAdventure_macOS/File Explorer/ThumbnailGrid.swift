@@ -31,7 +31,7 @@ struct ThumbnailGrid: View {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(Array(resources.enumerated()), id: \.element.name) {
                         index, resource in
-                        ClickableThumbnail(
+                        SelectableThumbnail(
                             resource: resource,
                             index: index,
                             isSelected: isSelected(index),

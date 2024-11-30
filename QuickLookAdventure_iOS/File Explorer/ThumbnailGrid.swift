@@ -12,7 +12,9 @@ struct ThumbnailGrid: View {
     
     let resources: [Resource]
     
+    /// Tracks whether the grid allows selection.
     @State private var isSelectable: Bool = false
+    /// Stores the indexes of selected thumbnails.
     @State private var selectedIndexes: [Int] = []
     @State private var selectedResource: URL?
     @State private var longPressingIndex: Int? = nil
@@ -22,35 +24,30 @@ struct ThumbnailGrid: View {
     ]
     
     var body: some View {
-        VStack {
-            Text("Thumbnail Grid")
-                .font(.title)
-                .padding(.bottom)
-            
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(Array(resources.enumerated()), id: \.element.name) {
-                        index, resource in
-                        ClickableThumbnail(
-                            resource: resource,
-                            index: index,
-                            isSelected: isSelected(index),
-                            selection: select
-                        )
-                        .scaleEffect(longPressingIndex == index ? 1.2 : 1.0)
-                        .onLongPressGesture(minimumDuration: 0.5, pressing: { isPressing in
-                            withAnimation(.easeInOut(duration: 0.5)) {
-                                longPressingIndex = isPressing ? index : nil
-                            }
-                        }) {
-                            selectedResource = resource.url
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(Array(resources.enumerated()), id: \.element.name) {
+                    index, resource in
+                    SelectableThumbnail(
+                        resource: resource,
+                        index: index,
+                        isSelected: isSelected(index),
+                        selection: select
+                    )
+                    .scaleEffect(longPressingIndex == index ? 1.2 : 1.0)
+                    .onLongPressGesture(minimumDuration: 0.5) {
+                        selectedResource = resource.url
+                    } onPressingChanged: { isPressing in
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            longPressingIndex = isPressing ? index : nil
                         }
-                        .quickLookPreview($selectedResource)
                     }
+                    .quickLookPreview($selectedResource)
                 }
             }
         }
         .padding()
+        .navigationTitle("Thumbnail Grid")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if isSelectable {
@@ -69,10 +66,12 @@ struct ThumbnailGrid: View {
         }
     }
     
+    /// Check if a given index is selected.
     func isSelected(_ index: Int) -> Bool {
         selectedIndexes.contains(index)
     }
     
+    /// Toggle the selection of a specific index.
     func toggleSelection(index: Int) {
         if let _index = selectedIndexes.firstIndex(of: index) {
             selectedIndexes.remove(at: _index)
@@ -81,6 +80,7 @@ struct ThumbnailGrid: View {
         }
     }
     
+    /// Select a range of indexes (used for multi-selection gestures).
     func selectRange(from: Int, to: Int) {
         let collection: any Collection<Int>
         if from < to {
@@ -96,6 +96,7 @@ struct ThumbnailGrid: View {
         }
     }
     
+    /// Select a specific index, clearing other selections.
     func select(index: Int) {
         guard isSelectable else { return }
         

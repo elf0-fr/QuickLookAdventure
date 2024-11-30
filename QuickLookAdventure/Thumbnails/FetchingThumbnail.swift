@@ -40,6 +40,8 @@ struct FetchingThumbnail: View {
             if let image = thumbnail?.cgImage {
                 thumbnailLogger.notice("Thumbnail image found for \(resource.name).\(resource.extension).")
                 cgImage = image
+            } else {
+                thumbnailLogger.error("Thumbnail image not found for \(resource.name).\(resource.extension).")
             }
         }
     }
@@ -52,8 +54,8 @@ struct FetchingThumbnail: View {
         resource: Resource.sampleData[0],
         cgImage: $cgImage
     )
+    .frame(width: 90, height: 90)
 #if os(macOS)
-        .frame(width: 90, height: 90)
         .padding()
 #endif
 }
