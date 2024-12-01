@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "769DD0FD2CD4EBBE004FF819"
-               BuildableName = "QuickLookAdventure_macOS.app"
-               BlueprintName = "QuickLookAdventure_macOS"
+               BlueprintIdentifier = "76AB28F22CE5DDDB000365D9"
+               BuildableName = "QuickLookAdventure_iOS.app"
+               BlueprintName = "QuickLookAdventure_iOS"
                ReferencedContainer = "container:QuickLookAdventure.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -35,9 +35,9 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "76553E4A2CFCFF3B001CFC9D"
-               BuildableName = "QuickLookAdventure_macOSTests.xctest"
-               BlueprintName = "QuickLookAdventure_macOSTests"
+               BlueprintIdentifier = "76553E572CFCFF59001CFC9D"
+               BuildableName = "QuickLookAdventure_iOSTests.xctest"
+               BlueprintName = "QuickLookAdventure_iOSTests"
                ReferencedContainer = "container:QuickLookAdventure.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,9 +57,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "769DD0FD2CD4EBBE004FF819"
-            BuildableName = "QuickLookAdventure_macOS.app"
-            BlueprintName = "QuickLookAdventure_macOS"
+            BlueprintIdentifier = "76AB28F22CE5DDDB000365D9"
+            BuildableName = "QuickLookAdventure_iOS.app"
+            BlueprintName = "QuickLookAdventure_iOS"
             ReferencedContainer = "container:QuickLookAdventure.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "769DD0FD2CD4EBBE004FF819"
-            BuildableName = "QuickLookAdventure_macOS.app"
-            BlueprintName = "QuickLookAdventure_macOS"
+            BlueprintIdentifier = "76AB28F22CE5DDDB000365D9"
+            BuildableName = "QuickLookAdventure_iOS.app"
+            BlueprintName = "QuickLookAdventure_iOS"
             ReferencedContainer = "container:QuickLookAdventure.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

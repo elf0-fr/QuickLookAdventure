@@ -46,8 +46,8 @@ class DragAndDropViewModel {
     }
     
     func remove(resource: Resource) {
-        resources.removeAll { _resource in
-            _resource.name == resource.name
+        if let index = resources.firstIndex(of: resource) {
+            resources.remove(at: index)
         }
     }
 }

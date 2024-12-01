@@ -6,12 +6,63 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		76553E4F2CFCFF3B001CFC9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 769DD0F62CD4EBBE004FF819 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 769DD0FD2CD4EBBE004FF819;
+			remoteInfo = QuickLookAdventure_macOS;
+		};
+		76553E5C2CFCFF59001CFC9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 769DD0F62CD4EBBE004FF819 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76AB28F22CE5DDDB000365D9;
+			remoteInfo = QuickLookAdventure_iOS;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		76553E4B2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickLookAdventure_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76553E582CFCFF59001CFC9D /* QuickLookAdventure_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickLookAdventure_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		769DD0FE2CD4EBBE004FF819 /* QuickLookAdventure_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickLookAdventure_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76AB28F32CE5DDDB000365D9 /* QuickLookAdventure_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickLookAdventure_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		76553E692CFD015C001CFC9D /* Exceptions for "QuickLookAdventure_macOS" folder in "QuickLookAdventure_macOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				macOS_Info.plist,
+			);
+			target = 769DD0FD2CD4EBBE004FF819 /* QuickLookAdventure_macOS */;
+		};
+		76553E6A2CFD0162001CFC9D /* Exceptions for "QuickLookAdventure_iOS" folder in "QuickLookAdventure_iOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				iOS_Info.plist,
+			);
+			target = 76AB28F22CE5DDDB000365D9 /* QuickLookAdventure_iOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		76553E4C2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QuickLookAdventure_macOSTests;
+			sourceTree = "<group>";
+		};
+		76553E592CFCFF59001CFC9D /* QuickLookAdventure_iOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QuickLookAdventure_iOSTests;
+			sourceTree = "<group>";
+		};
+		76553E612CFCFF6B001CFC9D /* QuickLookAdventureTest */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QuickLookAdventureTest;
+			sourceTree = "<group>";
+		};
 		769DD1002CD4EBBE004FF819 /* QuickLookAdventure */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = QuickLookAdventure;
@@ -19,17 +70,37 @@
 		};
 		76AB28F42CE5DDDB000365D9 /* QuickLookAdventure_iOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				76553E6A2CFD0162001CFC9D /* Exceptions for "QuickLookAdventure_iOS" folder in "QuickLookAdventure_iOS" target */,
+			);
 			path = QuickLookAdventure_iOS;
 			sourceTree = "<group>";
 		};
 		76AB29132CE5E242000365D9 /* QuickLookAdventure_macOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				76553E692CFD015C001CFC9D /* Exceptions for "QuickLookAdventure_macOS" folder in "QuickLookAdventure_macOS" target */,
+			);
 			path = QuickLookAdventure_macOS;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		76553E482CFCFF3B001CFC9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76553E552CFCFF59001CFC9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		769DD0FB2CD4EBBE004FF819 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -53,6 +124,9 @@
 				769DD1002CD4EBBE004FF819 /* QuickLookAdventure */,
 				76AB29132CE5E242000365D9 /* QuickLookAdventure_macOS */,
 				76AB28F42CE5DDDB000365D9 /* QuickLookAdventure_iOS */,
+				76553E612CFCFF6B001CFC9D /* QuickLookAdventureTest */,
+				76553E4C2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests */,
+				76553E592CFCFF59001CFC9D /* QuickLookAdventure_iOSTests */,
 				769DD0FF2CD4EBBE004FF819 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,6 +136,8 @@
 			children = (
 				769DD0FE2CD4EBBE004FF819 /* QuickLookAdventure_macOS.app */,
 				76AB28F32CE5DDDB000365D9 /* QuickLookAdventure_iOS.app */,
+				76553E4B2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests.xctest */,
+				76553E582CFCFF59001CFC9D /* QuickLookAdventure_iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +145,54 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		76553E4A2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76553E532CFCFF3B001CFC9D /* Build configuration list for PBXNativeTarget "QuickLookAdventure_macOSTests" */;
+			buildPhases = (
+				76553E472CFCFF3B001CFC9D /* Sources */,
+				76553E482CFCFF3B001CFC9D /* Frameworks */,
+				76553E492CFCFF3B001CFC9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76553E502CFCFF3B001CFC9D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				76553E4C2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests */,
+				76553E612CFCFF6B001CFC9D /* QuickLookAdventureTest */,
+			);
+			name = QuickLookAdventure_macOSTests;
+			packageProductDependencies = (
+			);
+			productName = QuickLookAdventure_macOSTests;
+			productReference = 76553E4B2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		76553E572CFCFF59001CFC9D /* QuickLookAdventure_iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76553E5E2CFCFF59001CFC9D /* Build configuration list for PBXNativeTarget "QuickLookAdventure_iOSTests" */;
+			buildPhases = (
+				76553E542CFCFF59001CFC9D /* Sources */,
+				76553E552CFCFF59001CFC9D /* Frameworks */,
+				76553E562CFCFF59001CFC9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76553E5D2CFCFF59001CFC9D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				76553E592CFCFF59001CFC9D /* QuickLookAdventure_iOSTests */,
+				76553E612CFCFF6B001CFC9D /* QuickLookAdventureTest */,
+			);
+			name = QuickLookAdventure_iOSTests;
+			packageProductDependencies = (
+			);
+			productName = QuickLookAdventure_iOSTests;
+			productReference = 76553E582CFCFF59001CFC9D /* QuickLookAdventure_iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		769DD0FD2CD4EBBE004FF819 /* QuickLookAdventure_macOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 769DD10F2CD4EBC0004FF819 /* Build configuration list for PBXNativeTarget "QuickLookAdventure_macOS" */;
@@ -125,6 +249,14 @@
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					76553E4A2CFCFF3B001CFC9D = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 769DD0FD2CD4EBBE004FF819;
+					};
+					76553E572CFCFF59001CFC9D = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 76AB28F22CE5DDDB000365D9;
+					};
 					769DD0FD2CD4EBBE004FF819 = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -149,11 +281,27 @@
 			targets = (
 				769DD0FD2CD4EBBE004FF819 /* QuickLookAdventure_macOS */,
 				76AB28F22CE5DDDB000365D9 /* QuickLookAdventure_iOS */,
+				76553E4A2CFCFF3B001CFC9D /* QuickLookAdventure_macOSTests */,
+				76553E572CFCFF59001CFC9D /* QuickLookAdventure_iOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		76553E492CFCFF3B001CFC9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76553E562CFCFF59001CFC9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		769DD0FC2CD4EBBE004FF819 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,6 +319,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		76553E472CFCFF3B001CFC9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76553E542CFCFF59001CFC9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		769DD0FA2CD4EBBE004FF819 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,7 +349,114 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		76553E502CFCFF3B001CFC9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 769DD0FD2CD4EBBE004FF819 /* QuickLookAdventure_macOS */;
+			targetProxy = 76553E4F2CFCFF3B001CFC9D /* PBXContainerItemProxy */;
+		};
+		76553E5D2CFCFF59001CFC9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76AB28F22CE5DDDB000365D9 /* QuickLookAdventure_iOS */;
+			targetProxy = 76553E5C2CFCFF59001CFC9D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		76553E512CFCFF3B001CFC9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DQFZB97R5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.romain-tirbisch.QuickLookAdventure-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickLookAdventure_macOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuickLookAdventure_macOS";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		76553E522CFCFF3B001CFC9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DQFZB97R5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.romain-tirbisch.QuickLookAdventure-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickLookAdventure_macOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuickLookAdventure_macOS";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		76553E5F2CFCFF59001CFC9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DQFZB97R5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.romain-tirbisch.QuickLookAdventure-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickLookAdventure_iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuickLookAdventure_iOS";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		76553E602CFCFF59001CFC9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DQFZB97R5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.romain-tirbisch.QuickLookAdventure-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickLookAdventure_iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuickLookAdventure_iOS";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
 		769DD10D2CD4EBC0004FF819 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -394,6 +663,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.romain-tirbisch.QuickLookAdventure-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -426,6 +698,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.romain-tirbisch.QuickLookAdventure-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -436,6 +711,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		76553E532CFCFF3B001CFC9D /* Build configuration list for PBXNativeTarget "QuickLookAdventure_macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76553E512CFCFF3B001CFC9D /* Debug */,
+				76553E522CFCFF3B001CFC9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76553E5E2CFCFF59001CFC9D /* Build configuration list for PBXNativeTarget "QuickLookAdventure_iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76553E5F2CFCFF59001CFC9D /* Debug */,
+				76553E602CFCFF59001CFC9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		769DD0F92CD4EBBE004FF819 /* Build configuration list for PBXProject "QuickLookAdventure" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
